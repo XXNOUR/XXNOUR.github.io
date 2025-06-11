@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>iiia — access granted</title>
+  <style>
+    body {
+      background: #0d0d0d;
+      color: #00ff88;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 2rem;
+      font-size: 1rem;
+      overflow: hidden;
+    }
+
+    #terminal {
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      background: #00ff88;
+      animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      50% { background: transparent; }
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+  <script>
+    const terminal = document.getElementById("terminal");
+    const lines = [
+      "/home/iiia ❯ whoami",
+      "light",
+      "└─ aka hades ── rewriting the OSI model one layer at a time",
+      "",
+      "They told me to make a README.",
+      "So I wrote a warning.",
+      "",
+      "I build systems that watch back.",
+      "I write code that whispers.",
+      "You won’t see me pushing daily commits,",
+      "I push boundaries.",
+      "",
+      "I don’t collaborate,",
+      "I converge.",
+      "With minds that speak in packets",
+      "and dream in hex.",
+      "",
+      "I don't fork repos.",
+      "I fork reality.",
+      "",
+      "> Fun fact?",
+      "> I boot into silence.",
+      "> And I trust nothing but the terminal.",
+      "",
+      "If you're here to scout talent, go scroll someone else's contributions graph.",
+      "This isn't LinkedIn.",
+      "This is a blacksite.",
+      "",
+      "And you're already in.",
+    ];
+
+    let line = 0;
+    let char = 0;
+
+    function typeLine() {
+      if (line >= lines.length) {
+        terminal.innerHTML += '\n<span class="cursor"></span>';
+        return;
+      }
+
+      const currentLine = lines[line];
+      const typed = currentLine.substring(0, char++);
+      terminal.innerHTML = lines.slice(0, line).join("\n") + "\n" + typed;
+
+      if (char <= currentLine.length) {
+        setTimeout(typeLine, 30);
+      } else {
+        char = 0;
+        line++;
+        setTimeout(typeLine, 400);
+      }
+    }
+
+    typeLine();
+  </script>
+</body>
+</html>
